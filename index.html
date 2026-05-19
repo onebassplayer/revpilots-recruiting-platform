@@ -11,19 +11,19 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary: #6C63FF;
-      --primary-dark: #4F46E5;
-      --accent: #22D3EE;
-      --accent2: #A78BFA;
+      --primary: #C0392B;
+      --primary-dark: #96281B;
+      --accent: #E74C3C;
+      --accent2: #F5A623;
       --dark: #0A0A0F;
       --dark2: #111118;
-      --dark3: #1A1A2E;
+      --dark3: #1A1010;
       --card: rgba(255,255,255,0.04);
       --card-border: rgba(255,255,255,0.08);
       --text: #F0F0FF;
       --muted: #9090B0;
-      --gradient: linear-gradient(135deg, #6C63FF 0%, #22D3EE 100%);
-      --gradient2: linear-gradient(135deg, #A78BFA 0%, #6C63FF 50%, #22D3EE 100%);
+      --gradient: linear-gradient(135deg, #C0392B 0%, #F5A623 100%);
+      --gradient2: linear-gradient(135deg, #E74C3C 0%, #C0392B 50%, #F5A623 100%);
     }
 
     html { scroll-behavior: smooth; }
@@ -36,7 +36,6 @@
       line-height: 1.6;
     }
 
-    /* ─── CANVAS BG ─── */
     #bg-canvas {
       position: fixed;
       inset: 0;
@@ -46,7 +45,7 @@
 
     .content-wrap { position: relative; z-index: 1; }
 
-    /* ─── NAV ─── */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -54,43 +53,64 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 3rem;
+      padding: 1rem 3rem;
       backdrop-filter: blur(20px);
-      background: rgba(10,10,15,0.7);
-      border-bottom: 1px solid var(--card-border);
+      background: rgba(10,10,15,0.85);
+      border-bottom: 1px solid rgba(192,57,43,0.2);
     }
 
     .nav-logo {
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.3rem;
-      letter-spacing: -0.02em;
     }
 
-    .nav-logo-img {
-      width: 40px;
-      height: 40px;
+    .nav-rp-logo {
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
-      object-fit: contain;
-      background: var(--gradient);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-      overflow: hidden;
+      border: 1px solid rgba(192,57,43,0.4);
     }
 
-    .nav-logo-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
+    .nav-rp-logo img {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      object-position: left center;
     }
 
-    .logo-placeholder-text { font-size: 1.3rem; }
+    .nav-wordmark {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .nav-wordmark span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-badge {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
 
     .nav-pill {
       background: var(--gradient);
@@ -103,11 +123,12 @@
       cursor: pointer;
       transition: opacity 0.2s, transform 0.2s;
       text-decoration: none;
+      box-shadow: 0 4px 20px rgba(192,57,43,0.35);
     }
 
     .nav-pill:hover { opacity: 0.85; transform: translateY(-1px); }
 
-    /* ─── HERO ─── */
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -122,8 +143,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(108,99,255,0.15);
-      border: 1px solid rgba(108,99,255,0.35);
+      background: rgba(192,57,43,0.12);
+      border: 1px solid rgba(192,57,43,0.3);
       color: var(--accent2);
       padding: 0.4rem 1.1rem;
       border-radius: 100px;
@@ -131,7 +152,7 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
     }
 
     .hero-eyebrow::before {
@@ -147,43 +168,25 @@
       50% { opacity: 0.4; transform: scale(0.7); }
     }
 
-    .hero-logo-wrapper {
-      width: 100px;
-      height: 100px;
-      border-radius: 24px;
-      margin: 0 auto 2rem;
-      background: var(--gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 60px rgba(108,99,255,0.4), 0 0 120px rgba(34,211,238,0.15);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-logo-wrapper::after {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 26px;
-      background: var(--gradient2);
-      z-index: -1;
-      animation: border-spin 4s linear infinite;
-    }
-
-    .hero-logo-wrapper img {
+    /* RevPilots banner hero area */
+    .hero-banner-wrap {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(192,57,43,0.3), 0 0 160px rgba(192,57,43,0.1);
+      border: 1px solid rgba(192,57,43,0.25);
     }
 
-    .hero-logo-placeholder {
-      font-size: 3rem;
+    .hero-banner-wrap img {
+      width: 100%;
+      display: block;
     }
 
     .hero h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.03em;
@@ -199,7 +202,7 @@
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
       color: var(--muted);
       max-width: 680px;
       margin-bottom: 2.8rem;
@@ -225,10 +228,10 @@
       cursor: pointer;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 30px rgba(108,99,255,0.4);
+      box-shadow: 0 4px 30px rgba(192,57,43,0.4);
     }
 
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(108,99,255,0.5); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(192,57,43,0.5); }
 
     .btn-ghost {
       background: transparent;
@@ -243,9 +246,9 @@
       transition: border-color 0.2s, background 0.2s;
     }
 
-    .btn-ghost:hover { border-color: var(--primary); background: rgba(108,99,255,0.08); }
+    .btn-ghost:hover { border-color: var(--primary); background: rgba(192,57,43,0.08); }
 
-    /* ─── STATS STRIP ─── */
+    /* STATS STRIP */
     .stats-strip {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -287,7 +290,7 @@
       letter-spacing: 0.06em;
     }
 
-    /* ─── SECTIONS ─── */
+    /* SECTIONS */
     section { padding: 6rem 2rem; }
 
     .section-inner {
@@ -297,8 +300,8 @@
 
     .section-tag {
       display: inline-block;
-      background: rgba(108,99,255,0.12);
-      border: 1px solid rgba(108,99,255,0.3);
+      background: rgba(192,57,43,0.1);
+      border: 1px solid rgba(192,57,43,0.25);
       color: var(--accent2);
       padding: 0.3rem 0.9rem;
       border-radius: 100px;
@@ -333,9 +336,9 @@
       margin-bottom: 3rem;
     }
 
-    /* ─── PIPELINE SECTION ─── */
+    /* PIPELINE */
     .pipeline-bg {
-      background: linear-gradient(180deg, var(--dark) 0%, var(--dark3) 50%, var(--dark) 100%);
+      background: linear-gradient(180deg, var(--dark) 0%, rgba(26,16,16,0.6) 50%, var(--dark) 100%);
     }
 
     .pipeline-flow {
@@ -362,18 +365,9 @@
     }
 
     .flow-step:hover { transform: translateY(-4px); border-color: var(--primary); }
-
     .flow-step + .flow-step { margin-left: 0.75rem; }
 
-    .flow-arrow {
-      display: none;
-    }
-
-    .flow-icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.6rem;
-      display: block;
-    }
+    .flow-icon { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
 
     .flow-num {
       position: absolute;
@@ -390,19 +384,10 @@
       justify-content: center;
     }
 
-    .flow-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-    }
+    .flow-name { font-size: 0.8rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+    .flow-sub { font-size: 0.7rem; color: var(--muted); }
 
-    .flow-sub {
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    /* ─── METRICS GRID ─── */
+    /* METRICS GRID */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -429,13 +414,10 @@
       transition: opacity 0.2s;
     }
 
-    .metric-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(108,99,255,0.15); }
+    .metric-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(192,57,43,0.12); }
     .metric-card:hover::before { opacity: 1; }
 
-    .metric-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+    .metric-icon { font-size: 2rem; margin-bottom: 1rem; }
 
     .metric-value {
       font-family: 'Space Grotesk', sans-serif;
@@ -449,23 +431,13 @@
       margin-bottom: 0.4rem;
     }
 
-    .metric-label {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-    }
+    .metric-label { font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+    .metric-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 
-    .metric-desc {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* ─── ROLE CARD ─── */
+    /* ROLE SECTION */
     .role-section {
-      background: linear-gradient(135deg, rgba(108,99,255,0.06) 0%, rgba(34,211,238,0.04) 100%);
-      border: 1px solid rgba(108,99,255,0.15);
+      background: linear-gradient(135deg, rgba(192,57,43,0.05) 0%, rgba(245,166,35,0.03) 100%);
+      border: 1px solid rgba(192,57,43,0.12);
       border-radius: 28px;
       padding: 3.5rem;
       display: grid;
@@ -474,12 +446,7 @@
       align-items: center;
     }
 
-    .role-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    .role-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
 
     .role-list li {
       display: flex;
@@ -494,7 +461,7 @@
       flex-shrink: 0;
       width: 24px; height: 24px;
       border-radius: 8px;
-      background: rgba(108,99,255,0.2);
+      background: rgba(192,57,43,0.18);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -506,9 +473,9 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(34,211,238,0.1);
-      border: 1px solid rgba(34,211,238,0.25);
-      color: var(--accent);
+      background: rgba(245,166,35,0.1);
+      border: 1px solid rgba(245,166,35,0.25);
+      color: var(--accent2);
       padding: 0.5rem 1rem;
       border-radius: 100px;
       font-size: 0.8rem;
@@ -516,59 +483,52 @@
       margin-bottom: 1.5rem;
     }
 
-    /* ─── IMAGE SHOWCASE ─── */
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 1.2rem;
-    }
-
-    .showcase-item {
-      border-radius: 20px;
-      overflow: hidden;
-      background: var(--dark3);
+    /* BUILT BY SECTION */
+    .built-by {
+      background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(192,57,43,0.04) 100%);
       border: 1px solid var(--card-border);
-      position: relative;
-      aspect-ratio: 16/9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .showcase-item:hover { transform: scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-
-    .showcase-item.tall { grid-row: span 2; aspect-ratio: auto; }
-
-    .showcase-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .showcase-placeholder {
+      border-radius: 28px;
+      padding: 3rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      color: var(--muted);
-      font-size: 0.85rem;
       text-align: center;
-      padding: 2rem;
-      height: 100%;
+      gap: 1.5rem;
     }
 
-    .showcase-placeholder .ph-icon {
-      font-size: 2.5rem;
-      opacity: 0.4;
+    .built-by-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
     }
 
-    /* ─── DISCLAIMER ─── */
+    .moonshot-logo-wrap {
+      background: #000;
+      border-radius: 16px;
+      padding: 1.5rem 2.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      max-width: 340px;
+    }
+
+    .moonshot-logo-wrap img {
+      width: 100%;
+      max-width: 280px;
+      display: block;
+    }
+
+    .built-by-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* DISCLAIMER */
     .disclaimer {
-      background: rgba(167,139,250,0.06);
-      border: 1px solid rgba(167,139,250,0.15);
+      background: rgba(245,166,35,0.05);
+      border: 1px solid rgba(245,166,35,0.12);
       border-radius: 16px;
       padding: 1.5rem 2rem;
       font-size: 0.8rem;
@@ -580,7 +540,7 @@
 
     .disclaimer strong { color: var(--accent2); }
 
-    /* ─── FOOTER ─── */
+    /* FOOTER */
     footer {
       border-top: 1px solid var(--card-border);
       padding: 2.5rem 3rem;
@@ -590,26 +550,52 @@
       font-size: 0.85rem;
       color: var(--muted);
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
-    .footer-logo {
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-rp {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
+      font-size: 1.1rem;
       background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* ─── RESPONSIVE ─── */
+    .footer-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--card-border);
+    }
+
+    .footer-moonshot {
+      background: #000;
+      border-radius: 8px;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-moonshot img {
+      height: 22px;
+      display: block;
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
+      .nav-badge { display: none; }
       .hero { padding: 7rem 1.5rem 4rem; }
       .role-section { grid-template-columns: 1fr; }
-      .showcase-grid { grid-template-columns: 1fr; }
-      .showcase-item.tall { grid-row: auto; aspect-ratio: 16/9; }
       footer { flex-direction: column; text-align: center; }
+      .footer-left { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -622,22 +608,23 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">
-      <div class="nav-logo-img" id="nav-logo-img">
-        <!-- REPLACE with: <img src="logo.png" alt="RevPilots Logo"> -->
-        <span class="logo-placeholder-text">✈️</span>
+      <div class="nav-rp-logo">
+        <img src="revpilots-banner.png" alt="RevPilots RP Logo" />
       </div>
-      RevPilots
+      <div class="nav-wordmark"><span>Rev</span>Pilots</div>
     </div>
-    <a href="#results" class="nav-pill">View Results</a>
+    <div class="nav-right">
+      <span class="nav-badge">Agentic Recruiting Platform</span>
+      <a href="#results" class="nav-pill">View Results</a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-eyebrow">Agentic Recruiting Platform &nbsp;·&nbsp; 2025–2026</div>
 
-    <div class="hero-logo-wrapper" id="hero-logo-wrapper">
-      <!-- REPLACE with: <img src="logo.png" alt="RevPilots Logo"> -->
-      <span class="hero-logo-placeholder">✈️</span>
+    <div class="hero-banner-wrap">
+      <img src="revpilots-banner.png" alt="RevPilots — Fractional & Full Time Vetted Sales Talent" />
     </div>
 
     <h1>
@@ -779,7 +766,7 @@
   </section>
 
   <!-- SCOPE & ROLE -->
-  <section style="background: linear-gradient(180deg, var(--dark) 0%, var(--dark3) 50%, var(--dark) 100%);">
+  <section style="background: linear-gradient(180deg, var(--dark) 0%, rgba(26,16,16,0.5) 50%, var(--dark) 100%);">
     <div class="section-inner">
       <div class="section-tag">Scope &amp; Role</div>
       <h2 class="section-title">Architecture to <span class="grad">Production</span></h2>
@@ -806,47 +793,36 @@
     </div>
   </section>
 
-  <!-- SHOWCASE IMAGES -->
-  <section id="showcase">
+  <!-- BUILT BY MOONSHOT -->
+  <section>
     <div class="section-inner">
-      <div class="section-tag">Platform Visuals</div>
-      <h2 class="section-title">See the <span class="grad">Platform</span> in Action</h2>
-      <p class="section-desc">Replace these placeholders with your actual screenshots, workflow diagrams, or hero images to complete the showcase.</p>
+      <div class="section-tag">Built By</div>
+      <h2 class="section-title">Engineered by <span class="grad">Moonshot Consulting</span></h2>
+      <p class="section-desc">Moonshot Consulting specializes in designing and deploying agentic AI systems that replace manual workflows — delivering measurable, compounding ROI from day one.</p>
 
-      <div class="showcase-grid">
-        <div class="showcase-item tall" id="img-main">
-          <!-- REPLACE with: <img src="screenshot-main.png" alt="Platform Dashboard"> -->
-          <div class="showcase-placeholder">
-            <div class="ph-icon">🖥️</div>
-            <strong style="color: var(--text);">Main Dashboard</strong>
-            <span>Replace with platform screenshot<br/>or workflow diagram</span>
-          </div>
+      <div class="built-by">
+        <div class="built-by-label">A Moonshot Consulting Deployment</div>
+        <div class="moonshot-logo-wrap">
+          <img src="moonshot-logo.png" alt="Moonshot Consulting" />
         </div>
-        <div class="showcase-item" id="img-top">
-          <!-- REPLACE with: <img src="screenshot-outreach.png" alt="Outreach Workflow"> -->
-          <div class="showcase-placeholder">
-            <div class="ph-icon">✉️</div>
-            <strong style="color: var(--text);">Outreach Flow</strong>
-            <span>Screenshot placeholder</span>
-          </div>
-        </div>
-        <div class="showcase-item" id="img-bottom">
-          <!-- REPLACE with: <img src="screenshot-profile.png" alt="Candidate Profile"> -->
-          <div class="showcase-placeholder">
-            <div class="ph-icon">📋</div>
-            <strong style="color: var(--text);">Candidate Profile</strong>
-            <span>Screenshot placeholder</span>
-          </div>
-        </div>
+        <p class="built-by-desc">
+          This platform was designed, architected, and deployed by Moonshot Consulting — executive-led AI strategy and implementation for companies ready to operate at a different level. From architecture through production, Moonshot owns the full stack so you don't have to.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">RevPilots</div>
+    <div class="footer-left">
+      <div class="footer-rp">RevPilots</div>
+      <div class="footer-divider"></div>
+      <div class="footer-moonshot">
+        <img src="moonshot-logo.png" alt="Moonshot Consulting" />
+      </div>
+    </div>
     <div>Agentic End-to-End Recruiting Platform &nbsp;·&nbsp; 2025–2026</div>
-    <div>Built with autonomous AI systems &amp; human oversight</div>
+    <div style="color: var(--muted); font-size: 0.8rem;">Built by Moonshot Consulting &nbsp;·&nbsp; AI systems that compound</div>
   </footer>
 
 </div>
@@ -867,11 +843,11 @@
     reset() {
       this.x = Math.random() * w;
       this.y = Math.random() * h;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
-      this.r = Math.random() * 1.5 + 0.5;
-      this.alpha = Math.random() * 0.5 + 0.1;
-      this.hue = Math.random() > 0.5 ? 250 : 190;
+      this.vx = (Math.random() - 0.5) * 0.35;
+      this.vy = (Math.random() - 0.5) * 0.35;
+      this.r = Math.random() * 1.5 + 0.4;
+      this.alpha = Math.random() * 0.4 + 0.08;
+      this.hue = Math.random() > 0.6 ? 5 : 30;
     }
     update() {
       this.x += this.vx; this.y += this.vy;
@@ -880,7 +856,7 @@
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${this.hue}, 80%, 65%, ${this.alpha})`;
+      ctx.fillStyle = `hsla(${this.hue}, 75%, 55%, ${this.alpha})`;
       ctx.fill();
     }
   }
@@ -900,7 +876,7 @@
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(108,99,255,${0.12 * (1 - d / 100)})`;
+          ctx.strokeStyle = `rgba(192,57,43,${0.1 * (1 - d / 100)})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
