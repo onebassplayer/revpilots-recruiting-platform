@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --primary: #C0392B;
       --primary-dark: #96281B;
@@ -25,577 +24,199 @@
       --gradient: linear-gradient(135deg, #C0392B 0%, #F5A623 100%);
       --gradient2: linear-gradient(135deg, #E74C3C 0%, #C0392B 50%, #F5A623 100%);
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--dark);
-      color: var(--text);
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content-wrap { position: relative; z-index: 1; }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 3rem;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 2.5rem;
       backdrop-filter: blur(20px);
-      background: rgba(10,10,15,0.85);
-      border-bottom: 1px solid rgba(192,57,43,0.2);
+      background: rgba(10,10,15,0.88);
+      border-bottom: 1px solid rgba(192,57,43,0.18);
     }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .nav-left { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-moonshot-logo {
+      background: #000; border-radius: 10px; padding: 0.35rem 0.7rem;
+      border: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center;
     }
-
-    .nav-rp-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      overflow: hidden;
-      flex-shrink: 0;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(192,57,43,0.4);
+    .nav-moonshot-logo img { height: 26px; display: block; }
+    .nav-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.1); }
+    .nav-project-label {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem;
+      color: rgba(240,240,255,0.6); letter-spacing: -0.01em;
     }
-
-    .nav-rp-logo img {
-      width: 44px;
-      height: 44px;
-      object-fit: cover;
-      object-position: left center;
-    }
-
-    .nav-wordmark {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-
-    .nav-wordmark span {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .nav-badge {
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
+    .nav-project-label span { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+    .nav-badge { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
     .nav-pill {
-      background: var(--gradient);
-      color: #fff;
-      border: none;
-      padding: 0.55rem 1.4rem;
-      border-radius: 100px;
-      font-weight: 600;
-      font-size: 0.875rem;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s;
-      text-decoration: none;
+      background: var(--gradient); color: #fff; border: none;
+      padding: 0.5rem 1.3rem; border-radius: 100px; font-weight: 600; font-size: 0.875rem;
+      cursor: pointer; transition: opacity 0.2s, transform 0.2s; text-decoration: none;
       box-shadow: 0 4px 20px rgba(192,57,43,0.35);
     }
-
     .nav-pill:hover { opacity: 0.85; transform: translateY(-1px); }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8rem 2rem 4rem;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 4rem;
     }
-
     .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(192,57,43,0.12);
-      border: 1px solid rgba(192,57,43,0.3);
-      color: var(--accent2);
-      padding: 0.4rem 1.1rem;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(192,57,43,0.12); border: 1px solid rgba(192,57,43,0.3);
+      color: var(--accent2); padding: 0.4rem 1.1rem; border-radius: 100px;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 2rem;
     }
-
     .hero-eyebrow::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent2);
-      animation: pulse-dot 2s infinite;
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent2); animation: pulse-dot 2s infinite;
     }
-
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.4; transform: scale(0.7); }
     }
-
-    /* RevPilots banner hero area */
-    .hero-banner-wrap {
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto 2.5rem;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 0 80px rgba(192,57,43,0.3), 0 0 160px rgba(192,57,43,0.1);
-      border: 1px solid rgba(192,57,43,0.25);
+    .hero-logo-wrap {
+      width: 90px; height: 90px; margin: 0 auto 2rem;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 0 60px rgba(192,57,43,0.4), 0 0 120px rgba(192,57,43,0.15);
+      border: 1px solid rgba(192,57,43,0.3);
     }
-
-    .hero-banner-wrap img {
-      width: 100%;
-      display: block;
-    }
-
+    .hero-logo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .hero h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.8rem, 7vw, 5.2rem);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-      max-width: 900px;
+      font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 800;
+      line-height: 1.05; letter-spacing: -0.03em;
+      margin-bottom: 1.5rem; max-width: 900px;
     }
-
     .hero h1 .grad {
-      background: var(--gradient2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background: var(--gradient2); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
     }
-
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.15rem);
-      color: var(--muted);
-      max-width: 680px;
-      margin-bottom: 2.8rem;
-      line-height: 1.7;
+      font-size: clamp(1rem, 2.5vw, 1.15rem); color: var(--muted);
+      max-width: 680px; margin-bottom: 2.8rem; line-height: 1.7;
     }
-
-    .hero-cta-row {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 5rem;
+    .hero-banner-wrap {
+      width: 100%; max-width: 700px; margin: 0 auto 3rem;
+      border-radius: 18px; overflow: hidden;
+      box-shadow: 0 0 60px rgba(192,57,43,0.25), 0 0 120px rgba(192,57,43,0.08);
+      border: 1px solid rgba(192,57,43,0.2);
     }
-
+    .hero-banner-wrap img { width: 100%; display: block; }
+    .hero-cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 5rem; }
     .btn-primary {
-      background: var(--gradient);
-      color: #fff;
-      border: none;
-      padding: 0.9rem 2.2rem;
-      border-radius: 100px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--gradient); color: #fff; border: none;
+      padding: 0.9rem 2.2rem; border-radius: 100px; font-weight: 700; font-size: 1rem;
+      cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 4px 30px rgba(192,57,43,0.4);
     }
-
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(192,57,43,0.5); }
-
     .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--card-border);
-      padding: 0.9rem 2.2rem;
-      border-radius: 100px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
+      background: transparent; color: var(--text); border: 1px solid var(--card-border);
+      padding: 0.9rem 2.2rem; border-radius: 100px; font-weight: 600; font-size: 1rem;
+      cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s;
     }
-
     .btn-ghost:hover { border-color: var(--primary); background: rgba(192,57,43,0.08); }
 
-    /* STATS STRIP */
+    /* ── STATS ── */
     .stats-strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1px;
-      background: var(--card-border);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      overflow: hidden;
-      max-width: 1000px;
-      width: 100%;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px; background: var(--card-border);
+      border: 1px solid var(--card-border); border-radius: 20px;
+      overflow: hidden; max-width: 1000px; width: 100%;
     }
-
-    .stat-item {
-      background: var(--dark2);
-      padding: 1.8rem 1.5rem;
-      text-align: center;
-      transition: background 0.2s;
-    }
-
+    .stat-item { background: var(--dark2); padding: 1.8rem 1.5rem; text-align: center; transition: background 0.2s; }
     .stat-item:hover { background: var(--dark3); }
-
     .stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      background: var(--gradient2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 0.4rem;
+      font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 800;
+      background: var(--gradient2); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; margin-bottom: 0.4rem;
     }
+    .stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
 
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    /* SECTIONS */
+    /* ── SECTIONS ── */
     section { padding: 6rem 2rem; }
-
-    .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
+    .section-inner { max-width: 1200px; margin: 0 auto; }
     .section-tag {
-      display: inline-block;
-      background: rgba(192,57,43,0.1);
-      border: 1px solid rgba(192,57,43,0.25);
-      color: var(--accent2);
-      padding: 0.3rem 0.9rem;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+      display: inline-block; background: rgba(192,57,43,0.1);
+      border: 1px solid rgba(192,57,43,0.25); color: var(--accent2);
+      padding: 0.3rem 0.9rem; border-radius: 100px; font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem;
     }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.15; }
+    .section-title .grad { background: var(--gradient2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-desc { color: var(--muted); font-size: 1.05rem; max-width: 600px; line-height: 1.7; margin-bottom: 3rem; }
 
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-      line-height: 1.15;
-    }
-
-    .section-title .grad {
-      background: var(--gradient2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .section-desc {
-      color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 600px;
-      line-height: 1.7;
-      margin-bottom: 3rem;
-    }
-
-    /* PIPELINE */
-    .pipeline-bg {
-      background: linear-gradient(180deg, var(--dark) 0%, rgba(26,16,16,0.6) 50%, var(--dark) 100%);
-    }
-
-    .pipeline-flow {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary) transparent;
-    }
-
-    .flow-step {
-      flex: 1;
-      min-width: 140px;
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      position: relative;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
+    /* ── PIPELINE ── */
+    .pipeline-bg { background: linear-gradient(180deg, var(--dark) 0%, rgba(26,16,16,0.6) 50%, var(--dark) 100%); }
+    .pipeline-flow { display: flex; align-items: stretch; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 1rem; scrollbar-width: thin; scrollbar-color: var(--primary) transparent; }
+    .flow-step { flex: 1; min-width: 140px; background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.5rem 1rem; text-align: center; position: relative; transition: transform 0.2s, border-color 0.2s; }
     .flow-step:hover { transform: translateY(-4px); border-color: var(--primary); }
     .flow-step + .flow-step { margin-left: 0.75rem; }
-
     .flow-icon { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
-
-    .flow-num {
-      position: absolute;
-      top: -10px; left: 50%;
-      transform: translateX(-50%);
-      background: var(--gradient);
-      color: #fff;
-      font-size: 0.65rem;
-      font-weight: 800;
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    .flow-num { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--gradient); color: #fff; font-size: 0.65rem; font-weight: 800; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .flow-name { font-size: 0.8rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
     .flow-sub { font-size: 0.7rem; color: var(--muted); }
 
-    /* METRICS GRID */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .metric-card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 2rem;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .metric-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gradient);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
+    /* ── METRICS ── */
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .metric-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 20px; padding: 2rem; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+    .metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gradient); opacity: 0; transition: opacity 0.2s; }
     .metric-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(192,57,43,0.12); }
     .metric-card:hover::before { opacity: 1; }
-
     .metric-icon { font-size: 2rem; margin-bottom: 1rem; }
-
-    .metric-value {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 800;
-      background: var(--gradient2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-
+    .metric-value { font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 800; background: var(--gradient2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 0.4rem; }
     .metric-label { font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
     .metric-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 
-    /* ROLE SECTION */
-    .role-section {
-      background: linear-gradient(135deg, rgba(192,57,43,0.05) 0%, rgba(245,166,35,0.03) 100%);
-      border: 1px solid rgba(192,57,43,0.12);
-      border-radius: 28px;
-      padding: 3.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
+    /* ── ROLE ── */
+    .role-section { background: linear-gradient(135deg, rgba(192,57,43,0.05) 0%, rgba(245,166,35,0.03) 100%); border: 1px solid rgba(192,57,43,0.12); border-radius: 28px; padding: 3.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
     .role-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .role-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: var(--muted); line-height: 1.5; }
+    .role-list li .icon { flex-shrink: 0; width: 24px; height: 24px; border-radius: 8px; background: rgba(192,57,43,0.18); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; margin-top: 0.1rem; }
+    .human-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.25); color: var(--accent2); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1.5rem; }
 
-    .role-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    /* ── BUILT BY ── */
+    .built-by { background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(192,57,43,0.04) 100%); border: 1px solid var(--card-border); border-radius: 28px; padding: 3rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+    .built-by-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+    .moonshot-logo-card { background: #000; border-radius: 16px; padding: 2rem 3rem; border: 1px solid rgba(255,255,255,0.07); }
+    .moonshot-logo-card img { height: 42px; display: block; }
+    .built-by-desc { font-size: 1rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
 
-    .role-list li .icon {
-      flex-shrink: 0;
-      width: 24px; height: 24px;
-      border-radius: 8px;
-      background: rgba(192,57,43,0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      margin-top: 0.1rem;
-    }
-
-    .human-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(245,166,35,0.1);
-      border: 1px solid rgba(245,166,35,0.25);
-      color: var(--accent2);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-
-    /* BUILT BY SECTION */
-    .built-by {
-      background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(192,57,43,0.04) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 28px;
-      padding: 3rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 1.5rem;
-    }
-
-    .built-by-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 600;
-    }
-
-    .moonshot-logo-wrap {
-      background: #000;
-      border-radius: 16px;
-      padding: 1.5rem 2.5rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      max-width: 340px;
-    }
-
-    .moonshot-logo-wrap img {
-      width: 100%;
-      max-width: 280px;
-      display: block;
-    }
-
-    .built-by-desc {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.7;
-    }
-
-    /* DISCLAIMER */
-    .disclaimer {
-      background: rgba(245,166,35,0.05);
-      border: 1px solid rgba(245,166,35,0.12);
-      border-radius: 16px;
-      padding: 1.5rem 2rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.6;
-      max-width: 900px;
-      margin: 3rem auto 0;
-    }
-
+    /* ── DISCLAIMER ── */
+    .disclaimer { background: rgba(245,166,35,0.05); border: 1px solid rgba(245,166,35,0.12); border-radius: 16px; padding: 1.5rem 2rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6; max-width: 900px; margin: 3rem auto 0; }
     .disclaimer strong { color: var(--accent2); }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--card-border);
-      padding: 2.5rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      color: var(--muted);
-      flex-wrap: wrap;
-      gap: 1.5rem;
+      padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.85rem; color: var(--muted); flex-wrap: wrap; gap: 1.2rem;
     }
+    .footer-left { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-moonshot-logo { background: #000; border-radius: 10px; padding: 0.4rem 0.9rem; border: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; }
+    .footer-moonshot-logo img { height: 26px; display: block; }
+    .footer-divider { width: 1px; height: 28px; background: var(--card-border); }
+    .footer-tagline { font-size: 0.8rem; color: var(--muted); }
+    .footer-center { font-size: 0.8rem; color: var(--muted); text-align: center; }
+    .footer-right { font-size: 0.75rem; color: rgba(144,144,176,0.5); }
 
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-rp {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .footer-divider {
-      width: 1px;
-      height: 28px;
-      background: var(--card-border);
-    }
-
-    .footer-moonshot {
-      background: #000;
-      border-radius: 8px;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .footer-moonshot img {
-      height: 22px;
-      display: block;
-    }
-
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
+      nav { padding: 0.8rem 1.2rem; }
       .nav-badge { display: none; }
       .hero { padding: 7rem 1.5rem 4rem; }
       .role-section { grid-template-columns: 1fr; }
-      footer { flex-direction: column; text-align: center; }
-      .footer-left { flex-direction: column; align-items: center; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .footer-left { flex-direction: row; }
     }
   </style>
 </head>
@@ -607,11 +228,12 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">
-      <div class="nav-rp-logo">
-        <img src="revpilots-banner.png" alt="RevPilots RP Logo" />
+    <div class="nav-left">
+      <div class="nav-moonshot-logo">
+        <img src="moonshot-logo.png" alt="Moonshot Consulting" />
       </div>
-      <div class="nav-wordmark"><span>Rev</span>Pilots</div>
+      <div class="nav-divider"></div>
+      <div class="nav-project-label">RevPilots <span>Case Study</span></div>
     </div>
     <div class="nav-right">
       <span class="nav-badge">Agentic Recruiting Platform</span>
@@ -623,8 +245,8 @@
   <section class="hero">
     <div class="hero-eyebrow">Agentic Recruiting Platform &nbsp;·&nbsp; 2025–2026</div>
 
-    <div class="hero-banner-wrap">
-      <img src="revpilots-banner.png" alt="RevPilots — Fractional & Full Time Vetted Sales Talent" />
+    <div class="hero-logo-wrap">
+      <img src="revpilots-logo.png" alt="RevPilots" />
     </div>
 
     <h1>
@@ -636,32 +258,21 @@
       Built and deployed a fully autonomous end-to-end recruiting pipeline for RevPilots — handling sourcing, personalized outreach, scheduling, candidate scoring, profile generation, and client-ready packet delivery with <strong>zero manual effort on the front end</strong>.
     </p>
 
+    <div class="hero-banner-wrap">
+      <img src="revpilots-banner.png" alt="RevPilots — Fractional & Full Time Vetted Sales Talent" />
+    </div>
+
     <div class="hero-cta-row">
       <a href="#pipeline" class="btn-primary">Explore the Pipeline</a>
       <a href="#results" class="btn-ghost">See Results</a>
     </div>
 
     <div class="stats-strip">
-      <div class="stat-item">
-        <div class="stat-num">80–90%</div>
-        <div class="stat-label">Time Saved</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">3–5x</div>
-        <div class="stat-label">Productivity</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">300+</div>
-        <div class="stat-label">Candidates/Week</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">15 min</div>
-        <div class="stat-label">Profile Generation</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">$8K+</div>
-        <div class="stat-label">Savings Per Hire</div>
-      </div>
+      <div class="stat-item"><div class="stat-num">80–90%</div><div class="stat-label">Time Saved</div></div>
+      <div class="stat-item"><div class="stat-num">3–5x</div><div class="stat-label">Productivity</div></div>
+      <div class="stat-item"><div class="stat-num">300+</div><div class="stat-label">Candidates/Week</div></div>
+      <div class="stat-item"><div class="stat-num">15 min</div><div class="stat-label">Profile Generation</div></div>
+      <div class="stat-item"><div class="stat-num">$8K+</div><div class="stat-label">Savings Per Hire</div></div>
     </div>
   </section>
 
@@ -671,44 +282,13 @@
       <div class="section-tag">End-to-End Workflow</div>
       <h2 class="section-title">The Agentic <span class="grad">Pipeline</span></h2>
       <p class="section-desc">A fully autonomous front-end recruiting system — architected for zero manual intervention from first source to final delivery.</p>
-
       <div class="pipeline-flow">
-        <div class="flow-step">
-          <span class="flow-num">1</span>
-          <span class="flow-icon">🔍</span>
-          <div class="flow-name">Sourcing</div>
-          <div class="flow-sub">Automated candidate discovery at scale</div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-num">2</span>
-          <span class="flow-icon">✉️</span>
-          <div class="flow-name">Outreach</div>
-          <div class="flow-sub">Personalized AI-crafted messaging</div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-num">3</span>
-          <span class="flow-icon">📅</span>
-          <div class="flow-name">Scheduling</div>
-          <div class="flow-sub">Frictionless calendar coordination</div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-num">4</span>
-          <span class="flow-icon">⚡</span>
-          <div class="flow-name">Scoring</div>
-          <div class="flow-sub">Intelligent fit analysis & ranking</div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-num">5</span>
-          <span class="flow-icon">📋</span>
-          <div class="flow-name">Profiling</div>
-          <div class="flow-sub">Automated candidate packet generation</div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-num">6</span>
-          <span class="flow-icon">🚀</span>
-          <div class="flow-name">Delivery</div>
-          <div class="flow-sub">Client-ready packets, auto-delivered</div>
-        </div>
+        <div class="flow-step"><span class="flow-num">1</span><span class="flow-icon">🔍</span><div class="flow-name">Sourcing</div><div class="flow-sub">Automated candidate discovery at scale</div></div>
+        <div class="flow-step"><span class="flow-num">2</span><span class="flow-icon">✉️</span><div class="flow-name">Outreach</div><div class="flow-sub">Personalized AI-crafted messaging</div></div>
+        <div class="flow-step"><span class="flow-num">3</span><span class="flow-icon">📅</span><div class="flow-name">Scheduling</div><div class="flow-sub">Frictionless calendar coordination</div></div>
+        <div class="flow-step"><span class="flow-num">4</span><span class="flow-icon">⚡</span><div class="flow-name">Scoring</div><div class="flow-sub">Intelligent fit analysis & ranking</div></div>
+        <div class="flow-step"><span class="flow-num">5</span><span class="flow-icon">📋</span><div class="flow-name">Profiling</div><div class="flow-sub">Automated candidate packet generation</div></div>
+        <div class="flow-step"><span class="flow-num">6</span><span class="flow-icon">🚀</span><div class="flow-name">Delivery</div><div class="flow-sub">Client-ready packets, auto-delivered</div></div>
       </div>
     </div>
   </section>
@@ -719,49 +299,15 @@
       <div class="section-tag">Measured Outcomes</div>
       <h2 class="section-title">Results That <span class="grad">Redefine</span> the Standard</h2>
       <p class="section-desc">Validated against SHRM, LinkedIn, and AI recruiting industry benchmarks (2025–2026). Results vary by volume and role type.</p>
-
       <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-icon">⏱️</div>
-          <div class="metric-value">80–90%</div>
-          <div class="metric-label">Reduction in Sourcing & Outreach Time</div>
-          <div class="metric-desc">Dozens of manual recruiting hours per hire replaced with autonomous agent workflows across the full front-end pipeline.</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon">📄</div>
-          <div class="metric-value">2h → 15min</div>
-          <div class="metric-label">Profile Generation Time</div>
-          <div class="metric-desc">Candidate packaging and profile creation cut from 2+ hours to under 15 minutes with consistent, high-quality output.</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon">🧑‍💼</div>
-          <div class="metric-value">3–5x</div>
-          <div class="metric-label">Productivity Multiplier</div>
-          <div class="metric-desc">One operator manages the volume previously requiring 3–5 full-time recruiters across the entire front-end pipeline.</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon">🤖</div>
-          <div class="metric-value">50–300+</div>
-          <div class="metric-label">Candidates Processed Weekly</div>
-          <div class="metric-desc">Fully autonomous processing at scale — from sourcing through scoring and delivery — with no manual intervention required.</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon">💰</div>
-          <div class="metric-value">$4K–$8K+</div>
-          <div class="metric-label">Savings Per Hire</div>
-          <div class="metric-desc">Direct labor cost elimination across the front-end pipeline. Compounded savings at volume represent transformative unit economics.</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon">📆</div>
-          <div class="metric-value">30–60%</div>
-          <div class="metric-label">Reduction in Time-to-Hire</div>
-          <div class="metric-desc">Faster pipeline throughput with consistent candidate quality and automated client-ready delivery accelerates every hire.</div>
-        </div>
+        <div class="metric-card"><div class="metric-icon">⏱️</div><div class="metric-value">80–90%</div><div class="metric-label">Reduction in Sourcing & Outreach Time</div><div class="metric-desc">Dozens of manual recruiting hours per hire replaced with autonomous agent workflows across the full front-end pipeline.</div></div>
+        <div class="metric-card"><div class="metric-icon">📄</div><div class="metric-value">2h → 15min</div><div class="metric-label">Profile Generation Time</div><div class="metric-desc">Candidate packaging and profile creation cut from 2+ hours to under 15 minutes with consistent, high-quality output.</div></div>
+        <div class="metric-card"><div class="metric-icon">🧑‍💼</div><div class="metric-value">3–5x</div><div class="metric-label">Productivity Multiplier</div><div class="metric-desc">One operator manages the volume previously requiring 3–5 full-time recruiters across the entire front-end pipeline.</div></div>
+        <div class="metric-card"><div class="metric-icon">🤖</div><div class="metric-value">50–300+</div><div class="metric-label">Candidates Processed Weekly</div><div class="metric-desc">Fully autonomous processing at scale — from sourcing through scoring and delivery — with no manual intervention required.</div></div>
+        <div class="metric-card"><div class="metric-icon">💰</div><div class="metric-value">$4K–$8K+</div><div class="metric-label">Savings Per Hire</div><div class="metric-desc">Direct labor cost elimination across the front-end pipeline. Compounded savings at volume represent transformative unit economics.</div></div>
+        <div class="metric-card"><div class="metric-icon">📆</div><div class="metric-value">30–60%</div><div class="metric-label">Reduction in Time-to-Hire</div><div class="metric-desc">Faster pipeline throughput with consistent candidate quality and automated client-ready delivery accelerates every hire.</div></div>
       </div>
-
-      <div class="disclaimer">
-        <strong>Performance Note:</strong> All metrics reflect measured workflow output validated against SHRM, LinkedIn, and AI recruiting industry data (2025–2026). Results vary by hiring volume, role type, and organizational configuration.
-      </div>
+      <div class="disclaimer"><strong>Performance Note:</strong> All metrics reflect measured workflow output validated against SHRM, LinkedIn, and AI recruiting industry data (2025–2026). Results vary by hiring volume, role type, and organizational configuration.</div>
     </div>
   </section>
 
@@ -771,12 +317,11 @@
       <div class="section-tag">Scope &amp; Role</div>
       <h2 class="section-title">Architecture to <span class="grad">Production</span></h2>
       <p class="section-desc">Full ownership from system design through deployment and ongoing performance tuning — with human control at every critical decision point.</p>
-
       <div class="role-section">
         <div>
           <div class="human-badge">🧑 Human-Led Where It Matters</div>
-          <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Designed for collaboration between human judgment and autonomous execution</h3>
-          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.7;">The agentic system handles the high-volume, repeatable front-end pipeline work. Every candidate interview, client relationship, and final placement decision stays firmly in human hands — where expertise and trust actually matter.</p>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;line-height:1.3;">Designed for collaboration between human judgment and autonomous execution</h3>
+          <p style="color:var(--muted);font-size:0.95rem;line-height:1.7;">The agentic system handles the high-volume, repeatable front-end pipeline work. Every candidate interview, client relationship, and final placement decision stays firmly in human hands — where expertise and trust actually matter.</p>
         </div>
         <div>
           <ul class="role-list">
@@ -799,15 +344,12 @@
       <div class="section-tag">Built By</div>
       <h2 class="section-title">Engineered by <span class="grad">Moonshot Consulting</span></h2>
       <p class="section-desc">Moonshot Consulting specializes in designing and deploying agentic AI systems that replace manual workflows — delivering measurable, compounding ROI from day one.</p>
-
       <div class="built-by">
         <div class="built-by-label">A Moonshot Consulting Deployment</div>
-        <div class="moonshot-logo-wrap">
+        <div class="moonshot-logo-card">
           <img src="moonshot-logo.png" alt="Moonshot Consulting" />
         </div>
-        <p class="built-by-desc">
-          This platform was designed, architected, and deployed by Moonshot Consulting — executive-led AI strategy and implementation for companies ready to operate at a different level. From architecture through production, Moonshot owns the full stack so you don't have to.
-        </p>
+        <p class="built-by-desc">This platform was designed, architected, and deployed by Moonshot Consulting — executive-led AI strategy and implementation for companies ready to operate at a different level. From architecture through production, Moonshot owns the full stack so you don't have to.</p>
       </div>
     </div>
   </section>
@@ -815,38 +357,29 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-left">
-      <div class="footer-rp">RevPilots</div>
-      <div class="footer-divider"></div>
-      <div class="footer-moonshot">
+      <div class="footer-moonshot-logo">
         <img src="moonshot-logo.png" alt="Moonshot Consulting" />
       </div>
+      <div class="footer-divider"></div>
+      <div class="footer-tagline">AI systems that compound</div>
     </div>
-    <div>Agentic End-to-End Recruiting Platform &nbsp;·&nbsp; 2025–2026</div>
-    <div style="color: var(--muted); font-size: 0.8rem;">Built by Moonshot Consulting &nbsp;·&nbsp; AI systems that compound</div>
+    <div class="footer-center">RevPilots Agentic Recruiting Platform &nbsp;·&nbsp; 2025–2026</div>
+    <div class="footer-right">Built by Moonshot Consulting</div>
   </footer>
 
 </div>
 
-<!-- ANIMATED BACKGROUND -->
 <script>
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d');
   let w, h, particles = [];
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-
+  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
   class Particle {
     constructor() { this.reset(); }
     reset() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.vx = (Math.random() - 0.5) * 0.35;
-      this.vy = (Math.random() - 0.5) * 0.35;
-      this.r = Math.random() * 1.5 + 0.4;
-      this.alpha = Math.random() * 0.4 + 0.08;
+      this.x = Math.random() * w; this.y = Math.random() * h;
+      this.vx = (Math.random() - 0.5) * 0.35; this.vy = (Math.random() - 0.5) * 0.35;
+      this.r = Math.random() * 1.5 + 0.4; this.alpha = Math.random() * 0.4 + 0.08;
       this.hue = Math.random() > 0.6 ? 5 : 30;
     }
     update() {
@@ -854,47 +387,25 @@
       if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
     }
     draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${this.hue}, 75%, 55%, ${this.alpha})`;
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${this.hue}, 75%, 55%, ${this.alpha})`; ctx.fill();
     }
   }
-
-  function init() {
-    resize();
-    particles = Array.from({ length: 120 }, () => new Particle());
-  }
-
+  function init() { resize(); particles = Array.from({ length: 120 }, () => new Particle()); }
   function drawConnections() {
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
+        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
         const d = Math.sqrt(dx * dx + dy * dy);
         if (d < 100) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(192,57,43,${0.1 * (1 - d / 100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(192,57,43,${0.1 * (1 - d / 100)})`; ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
     }
   }
-
-  function loop() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawConnections();
-    requestAnimationFrame(loop);
-  }
-
-  window.addEventListener('resize', resize);
-  init();
-  loop();
+  function loop() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); drawConnections(); requestAnimationFrame(loop); }
+  window.addEventListener('resize', resize); init(); loop();
 </script>
-
 </body>
 </html>
